@@ -1,6 +1,6 @@
 ---
 description: "Colocated vitest tests — AAA pattern, keep npm test green"
-globs: "app/**/*.test.ts"
+globs: "app/src/**/*.{test,spec}.{ts,tsx}"
 alwaysApply: false
 ---
 

@@ -2,6 +2,8 @@
 description: "Add a new Action: types → reducer → action creator → colocated test"
 ---
 
+# Add action
+
 Add a new store action for: $ARGUMENTS
 
 Follow the golden path and project rules in `.cursor/rules/` (especially

@@ -2,6 +2,8 @@
 description: "Refactor selected code to project conventions without behavior change"
 ---
 
+# Refactor
+
 Refactor the following to match project conventions: $ARGUMENTS
 
 Follow `.cursor/rules/` (`conventions.mdc`, `architecture.mdc`,

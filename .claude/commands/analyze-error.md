@@ -2,6 +2,8 @@
 description: "Analyze an error/stack trace and propose a type-safe fix"
 ---
 
+# Analyze error
+
 Analyze and fix this error: $ARGUMENTS
 
 Use project rules in `.cursor/rules/` (`conventions.mdc`, `do-not-touch.mdc`,
@@ -18,9 +20,10 @@ Redux/Zustand; respect the fixed `lib/text.ts` API.
    - real `lib/text.ts` helpers (`slugify`, `truncate`, `normalizeSpaces`) —
      do not invent `capitalize` / `camelCase`
 4. **Constraints:** no `any`, no `@ts-ignore` / `@ts-expect-error`; do **not**
-   edit `app/src/store.ts`; do not change `app/src/types.ts` unless the error
-   clearly requires a new `Action`/field and you state that explicitly; no new
-   npm dependencies.
+   edit `app/src/store.ts`; do **not** modify `app/src/types.ts` by default —
+   even if the error appears to need a new `Action` or field, **stop and ask
+   for explicit user approval** before any `types.ts` change; no new npm
+   dependencies.
 5. Implement the fix if safe and scoped; add or adjust a colocated vitest test
    when behavior changes.
 6. Verify with `cd app && npm test` and/or `npm run typecheck`.

@@ -21,8 +21,9 @@ What the AI produced:
   `"normal"`.
 - **No** Redux/Zustand/MobX; **no** new npm dependency; **no** direct mutation.
 - **Exports:** named only; **no** `any` / `@ts-ignore`.
-- **`store.ts`:** not edited (`do-not-touch`); `types.ts` only extended (field +
-  union variant), public `createStore` signature unchanged.
+- **`store.ts`:** not edited (`do-not-touch`); `types.ts` only extended with
+  `Priority` (`"low" | "normal" | "high"`), `priority` on `Task`, and the
+  `task/prioritized` `Action` variant; public `createStore` signature unchanged.
 - **Tests:** colocated updates in `reducer.test.ts` (default priority +
   immutability for `setPriority`); `cd app && npm test` — 16/16 green;
   `npm run typecheck` clean.
@@ -44,7 +45,7 @@ What the AI produced:
 - **Exports:** named only; **no** `any` / `@ts-ignore`.
 - **`store.ts`:** not edited.
 - **Tests:** updated expectations + immutability case; `cd app && npm test` —
-  17/17 green.
+  16/16 green (same suite total as Result A after re-run on the current tree).
 
 Notable for the write-up: with rules OFF the model did **not** fall into the
 classic failure modes from `materials/ab-task.md` (direct mutation, pulling in a
@@ -62,7 +63,7 @@ same way.
 | State library added | No | No |
 | Export style | Named exports only | Named exports only |
 | Type safety | Strict `Priority` union; typed `Action` variant; no `any` | Same; no `any` / `@ts-ignore` |
-| Touched protected core? | `types.ts` extended only; `store.ts` untouched | `types.ts` extended only; `store.ts` untouched |
+| Touched protected core? | `types.ts` extended (`Priority` union, `Task.priority`, `task/prioritized` Action); `store.ts` untouched; `createStore` signature unchanged | `types.ts` extended (`Priority` union, `Task.priority`, `task/prioritized` Action); `store.ts` untouched; `createStore` signature unchanged |
 | Explicit rule citations / guardrails in approach | Followed `.cursor/rules/` (architecture, do-not-touch, testing, conventions) | No `.mdc` loaded; steered by seeded code comments + `app/AGENTS.md` |
 | Classic OFF failure modes (mutation / Zustand / default export) | Absent | Also absent (unexpected vs `ab-task.md` examples) |
 

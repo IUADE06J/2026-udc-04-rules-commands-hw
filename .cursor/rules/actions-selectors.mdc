@@ -9,7 +9,7 @@ alwaysApply: false
 ## Context
 
 `app/src/actions.ts` holds the sanctioned action creators (`addTask`,
-`toggleTask`, `removeTask`, `setFilter`). `app/src/selectors.ts` holds pure
+`toggleTask`, `removeTask`, `setPriority`, `setFilter`). `app/src/selectors.ts` holds pure
 read helpers (`visibleTasks`, `remainingCount`). Together with `reducer.ts`
 they are where domain growth belongs — not ad-hoc UI logic.
 
