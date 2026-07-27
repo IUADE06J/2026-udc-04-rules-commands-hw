@@ -21,9 +21,11 @@ What the AI produced:
   `"normal"`.
 - **No** Redux/Zustand/MobX; **no** new npm dependency; **no** direct mutation.
 - **Exports:** named only; **no** `any` / `@ts-ignore`.
-- **`store.ts`:** not edited (`do-not-touch`); `types.ts` only extended with
-  `Priority` (`"low" | "normal" | "high"`), `priority` on `Task`, and the
-  `task/prioritized` `Action` variant; public `createStore` signature unchanged.
+- **`store.ts`:** not edited (`do-not-touch`). **`types.ts` contract
+  (`do-not-touch`):** only the golden-path add-action extensions are allowed —
+  `Priority` (`"low" | "normal" | "high"`), `Task.priority`, and the
+  `task/prioritized` `Action` variant; any other `types.ts` edits are forbidden.
+  Public `createStore` signature unchanged.
 - **Tests:** colocated updates in `reducer.test.ts` (default priority +
   immutability for `setPriority`); `cd app && npm test` — 16/16 green;
   `npm run typecheck` clean.
@@ -45,7 +47,8 @@ What the AI produced:
 - **Exports:** named only; **no** `any` / `@ts-ignore`.
 - **`store.ts`:** not edited.
 - **Tests:** updated expectations + immutability case; `cd app && npm test` —
-  16/16 green (same suite total as Result A after re-run on the current tree).
+  16/16 green (same suite total as Result A after re-run on the current tree);
+  `npm run typecheck` clean.
 
 Notable for the write-up: with rules OFF the model did **not** fall into the
 classic failure modes from `materials/ab-task.md` (direct mutation, pulling in a
@@ -63,7 +66,7 @@ same way.
 | State library added | No | No |
 | Export style | Named exports only | Named exports only |
 | Type safety | Strict `Priority` union; typed `Action` variant; no `any` | Same; no `any` / `@ts-ignore` |
-| Touched protected core? | `types.ts` extended (`Priority` union, `Task.priority`, `task/prioritized` Action); `store.ts` untouched; `createStore` signature unchanged | `types.ts` extended (`Priority` union, `Task.priority`, `task/prioritized` Action); `store.ts` untouched; `createStore` signature unchanged |
+| Touched protected core? | Same `do-not-touch` contract: `store.ts` untouched; `types.ts` only `Priority` + `Task.priority` + `task/prioritized` (no other type edits); `createStore` signature unchanged | Same `do-not-touch` contract: `store.ts` untouched; `types.ts` only `Priority` + `Task.priority` + `task/prioritized` (no other type edits); `createStore` signature unchanged |
 | Explicit rule citations / guardrails in approach | Followed `.cursor/rules/` (architecture, do-not-touch, testing, conventions) | No `.mdc` loaded; steered by seeded code comments + `app/AGENTS.md` |
 | Classic OFF failure modes (mutation / Zustand / default export) | Absent | Also absent (unexpected vs `ab-task.md` examples) |
 
